@@ -3,339 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAYFA YÜKLENİYOR</title>
-    <style>
-        /* ----- RESET & GENEL ----- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #0a0c0f;
-            font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0;
-            padding: 1rem;
-        }
-
-        /* ----- ANA KART (hacker cam) ----- */
-        .hacker-card {
-            background: rgba(0, 10, 20, 0.85);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border: 1px solid #00ff41;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.15), inset 0 0 20px rgba(0, 255, 65, 0.03);
-            border-radius: 2rem;
-            padding: 3rem 3.5rem;
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            transition: all 0.2s;
-        }
-
-        .hacker-card::before {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 20px;
-            right: 20px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #00ff41, transparent);
-            opacity: 0.3;
-            filter: blur(1px);
-        }
-
-        /* ----- BAŞLIK: SAYFA YÜKLENİYOR (glitch) ----- */
-        .hacker-title {
-            color: #00ff41;
-            font-size: 3rem;
-            font-weight: 500;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-shadow: 0 0 8px #00ff41, 0 0 20px #00aa33;
-            margin-bottom: 0.8rem;
-            word-break: break-word;
-            font-family: 'Courier New', monospace;
-        }
-
-        .glitch-text {
-            animation: glitch 1.8s infinite;
-        }
-
-        @keyframes glitch {
-            0% { text-shadow: 0 0 8px #00ff41, 0 0 20px #00aa33; }
-            20% { text-shadow: 2px 0 #ff00cc, -2px 0 #00ff41, 0 0 20px #00aa33; }
-            40% { text-shadow: -2px 0 #ff00cc, 2px 0 #00ff41, 0 0 30px #00ff41; }
-            60% { text-shadow: 1px 0 #00ccff, -1px 0 #00ff41, 0 0 25px #00aa33; }
-            80% { text-shadow: -1px 0 #00ccff, 1px 0 #00ff41, 0 0 20px #00ff41; }
-            100% { text-shadow: 0 0 8px #00ff41, 0 0 20px #00aa33; }
-        }
-
-        /* ----- "YAKINDA" ALT BAŞLIĞI (hacker stili) ----- */
-        .coming-soon {
-            color: #66ff88;
-            font-size: 1.8rem;
-            font-weight: 400;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            text-shadow: 0 0 15px #00ff41, 0 0 30px #00aa33;
-            margin-bottom: 1.8rem;
-            font-family: 'Courier New', monospace;
-            animation: pulseGlow 2s ease-in-out infinite;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.15);
-            padding-bottom: 0.8rem;
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.7; text-shadow: 0 0 10px #00ff41, 0 0 20px #00aa33; }
-            50% { opacity: 1; text-shadow: 0 0 25px #00ff41, 0 0 50px #00ff41, 0 0 80px #00aa33; }
-        }
-
-        /* ----- SPINNER (hacker) ----- */
-        .hacker-spinner {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin: 1.2rem 0 1.5rem 0;
-        }
-
-        .spinner-ring {
-            width: 70px;
-            height: 70px;
-            border: 5px solid rgba(0, 255, 65, 0.08);
-            border-top: 5px solid #00ff41;
-            border-right: 5px solid #00cc33;
-            border-radius: 50%;
-            animation: spin 1.2s cubic-bezier(0.6, 0.0, 0.4, 1.0) infinite;
-            box-shadow: 0 0 25px rgba(0, 255, 65, 0.2);
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .spinner-label {
-            color: #00cc44;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            background: rgba(0, 255, 65, 0.05);
-            padding: 0.4rem 1.2rem;
-            border: 1px solid rgba(0, 255, 65, 0.15);
-            border-radius: 40px;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 6px #00ff41;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.05);
-        }
-
-        /* ----- MATRIX KOD SATIRLARI ----- */
-        .matrix-lines {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            margin-top: 1.8rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            color: #00cc44;
-            opacity: 0.7;
-            text-shadow: 0 0 5px #00aa33;
-        }
-
-        .matrix-lines span {
-            display: block;
-            background: rgba(0, 255, 65, 0.02);
-            padding: 0.2rem 1.2rem;
-            border-radius: 20px;
-            border-left: 2px solid #00ff41;
-            letter-spacing: 2px;
-            animation: blink 1.6s step-end infinite;
-        }
-
-        .line1 { animation-delay: 0.0s; }
-        .line2 { animation-delay: 0.5s; }
-        .line3 { animation-delay: 1.0s; }
-        .line4 { animation-delay: 1.5s; }
-
-        @keyframes blink {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* ----- YÜZDE (hacker) ----- */
-        .progress-percent {
-            color: #00ff41;
-            font-size: 1.6rem;
-            font-weight: 400;
-            letter-spacing: 2px;
-            margin-top: 0.2rem;
-            opacity: 0.9;
-            text-shadow: 0 0 12px #00aa33;
-        }
-
-        /* ----- FOOTER ----- */
-        .hacker-footer {
-            margin-top: 2.2rem;
-            color: #00882b;
-            font-size: 0.8rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            opacity: 0.5;
-            border-top: 1px solid rgba(0, 255, 65, 0.08);
-            padding-top: 1.4rem;
-            font-family: 'Courier New', monospace;
-        }
-
-        .hacker-footer i {
-            font-style: normal;
-            display: inline-block;
-            animation: flicker 2.2s infinite;
-        }
-
-        @keyframes flicker {
-            0%, 100% { opacity: 0.4; }
-            30% { opacity: 1; text-shadow: 0 0 15px #00ff41; }
-            70% { opacity: 0.6; }
-        }
-
-        /* ----- RESPONSIVE ----- */
-        @media (max-width: 500px) {
-            .hacker-card { padding: 2rem 1.5rem; }
-            .hacker-title { font-size: 2.2rem; letter-spacing: 2px; }
-            .coming-soon { font-size: 1.3rem; letter-spacing: 5px; }
-            .spinner-ring { width: 55px; height: 55px; border-width: 4px; }
-            .spinner-label { font-size: 0.8rem; padding: 0.3rem 0.8rem; }
-            .matrix-lines span { font-size: 0.7rem; }
-            .hacker-footer { font-size: 0.6rem; }
-            .progress-percent { font-size: 1.2rem; }
-        }
-    </style>
+    <title>81 İl Lezzetleri – Türkiye'nin Yemek Rehberi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
 </head>
 <body>
-
-    <div class="hacker-card">
-
-        <!-- BAŞLIK: SAYFA YÜKLENİYOR -->
-        <div class="hacker-title glitch-text">SAYFA YÜKLENİYOR</div>
-
-        <!-- YAKINDA (coming soon) -->
-        <div class="coming-soon">✦ YAKINDA ✦</div>
-
-        <!-- SPINNER -->
-        <div class="hacker-spinner">
-            <div class="spinner-ring"></div>
-            <span class="spinner-label">>> HACKING <<</span>
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-flex">
+                <div class="logo">
+                    <span class="logo-icon">🍽️</span>
+                    <h1>81 <span>Lezzet</span></h1>
+                </div>
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">🌙</button>
+                    <button class="fav-toggle" id="favToggle" aria-label="Favoriler">❤️ <span id="favCount">0</span></button>
+                </div>
+            </div>
+            <!-- Arama -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="İl, yemek veya malzeme ara...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <!-- Kategori Filtreleri -->
+            <div class="category-filter" id="categoryFilter">
+                <button class="cat-btn active" data-cat="all">Tümü</button>
+                <button class="cat-btn" data-cat="corba">Çorba</button>
+                <button class="cat-btn" data-cat="kebap">Kebap</button>
+                <button class="cat-btn" data-cat="hamur">Hamur İşi</button>
+                <button class="cat-btn" data-cat="tatli">Tatlı</button>
+                <button class="cat-btn" data-cat="et">Et Yemekleri</button>
+                <button class="cat-btn" data-cat="sebze">Sebze</button>
+                <button class="cat-btn" data-cat="deniz">Deniz Ürünleri</button>
+            </div>
         </div>
+    </header>
 
-        <!-- YÜZDE -->
-        <div class="progress-percent" id="progressDisplay">%0</div>
-
-        <!-- MATRIX KOD SATIRLARI -->
-        <div class="matrix-lines">
-            <span class="line1">>_ decrypting payload...</span>
-            <span class="line2">>_ root access granted</span>
-            <span class="line3">>_ loading modules 0x7F</span>
-            <span class="line4">>_ firewall bypassed</span>
+    <!-- ANA İÇERİK -->
+    <main class="main">
+        <div class="container">
+            <!-- İl Kartları Grid -->
+            <div class="city-grid" id="cityGrid">
+                <!-- JavaScript tarafından doldurulacak -->
+            </div>
         </div>
+    </main>
 
-        <!-- FOOTER -->
-        <div class="hacker-footer">
-            <i>// anonymous //</i>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>🍽️ 81 İl Lezzetleri – 2026 · Tüm tarifler özgün ve yöreseldir.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL (Detay sayfası) -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <div id="modalBody">
+                <!-- JS ile doldurulacak -->
+            </div>
         </div>
     </div>
 
-    <script>
-        (function() {
-            "use strict";
-
-            const progressEl = document.getElementById('progressDisplay');
-            let progress = 0;
-            const maxProgress = 100;
-            let intervalId = null;
-
-            function updateProgress() {
-                if (progress >= maxProgress) {
-                    if (progressEl) {
-                        progressEl.textContent = '%100 ✓';
-                        progressEl.style.color = '#66ff88';
-                        progressEl.style.textShadow = '0 0 25px #00ff41, 0 0 60px #00aa33';
-                    }
-                    if (intervalId) {
-                        clearInterval(intervalId);
-                        intervalId = null;
-                    }
-                    return;
-                }
-
-                let step = Math.floor(Math.random() * 5) + 1;
-                if (progress > 85) {
-                    step = Math.floor(Math.random() * 2) + 1;
-                }
-                if (Math.random() < 0.2) {
-                    step = 0;
-                }
-
-                progress = Math.min(progress + step, maxProgress);
-
-                if (progressEl) {
-                    progressEl.textContent = `%${progress}`;
-                    if (progress > 70) {
-                        progressEl.style.color = '#66ff88';
-                    } else {
-                        progressEl.style.color = '#00ff41';
-                    }
-                }
-            }
-
-            if (progressEl) {
-                progressEl.textContent = '%0';
-            }
-
-            function startProgress() {
-                if (intervalId) clearInterval(intervalId);
-                updateProgress();
-                function scheduleNext() {
-                    if (progress >= maxProgress) return;
-                    const delay = Math.floor(Math.random() * 250) + 200;
-                    intervalId = setTimeout(() => {
-                        updateProgress();
-                        scheduleNext();
-                    }, delay);
-                }
-                scheduleNext();
-            }
-
-            window.addEventListener('load', function() {
-                startProgress();
-            });
-
-            // Tıklama ile hızlandırma
-            document.querySelector('.hacker-card')?.addEventListener('click', function(e) {
-                if (progress < maxProgress) {
-                    progress = Math.min(progress + 4, maxProgress);
-                    if (progressEl) {
-                        progressEl.textContent = `%${progress}`;
-                        if (progress >= 100) {
-                            progressEl.textContent = '%100 ✓';
-                            progressEl.style.color = '#66ff88';
-                        }
-                    }
-                }
-            });
-
-            console.log('%c>> SAYFA YÜKLENİYOR... HACKER MODU <<', 'color: #00ff41; font-size: 16px; font-weight: bold; background: #0a0c0f; padding: 6px 12px; border: 1px solid #00ff41;');
-            console.log('%c>_ root@localhost:~# ./hacker_loader', 'color: #00aa33;');
-
-        })();
-    </script>
-
+    <script src="data.js"></script>
+    <script src="script.js"></script>
 </body>
-            </html>
+</html>
