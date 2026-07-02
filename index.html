@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAYFA YÜKLENİYOR</title>
+    <style>
+        /* ----- RESET & GENEL ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c0f;  /* çok koyu, hacker hissi */
+            font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 1rem;
+        }
+
+        /* ----- ANA KART (terminal / hacker cam) ----- */
+        .hacker-card {
+            background: rgba(0, 10, 20, 0.85);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid #00ff41;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.15), inset 0 0 20px rgba(0, 255, 65, 0.03);
+            border-radius: 2rem;
+            padding: 3rem 3.5rem;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        /* ince bir "glitch" efekti için sahte çizgi */
+        .hacker-card::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00ff41, transparent);
+            opacity: 0.3;
+            filter: blur(1px);
+        }
+
+        /* ----- BAŞLIK: SAYFA YÜKLENİYOR (hacker stili) ----- */
+        .hacker-title {
+            color: #00ff41;
+            font-size: 3rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 8px #00ff41, 0 0 20px #00aa33;
+            margin-bottom: 1.2rem;
+            word-break: break-word;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* glitch efekti (hafif) */
+        .glitch-text {
+            animation: glitch 1.8s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0 0 8px #00ff41, 0 0 20px #00aa33; }
+            20% { text-shadow: 2px 0 #ff00cc, -2px 0 #00ff41, 0 0 20px #00aa33; }
+            40% { text-shadow: -2px 0 #ff00cc, 2px 0 #00ff41, 0 0 30px #00ff41; }
+            60% { text-shadow: 1px 0 #00ccff, -1px 0 #00ff41, 0 0 25px #00aa33; }
+            80% { text-shadow: -1px 0 #00ccff, 1px 0 #00ff41, 0 0 20px #00ff41; }
+            100% { text-shadow: 0 0 8px #00ff41, 0 0 20px #00aa33; }
+        }
+
+        /* ----- TERMINAL TARZI SPINNER (matrix ya da hacker) ----- */
+        .hacker-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin: 1.8rem 0 2rem 0;
+        }
+
+        /* klasik dönen çember ama hacker renkleri ve parlaklık */
+        .spinner-ring {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(0, 255, 65, 0.08);
+            border-top: 5px solid #00ff41;
+            border-right: 5px solid #00cc33;
+            border-radius: 50%;
+            animation: spin 1.2s cubic-bezier(0.6, 0.0, 0.4, 1.0) infinite;
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.2);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* yanına "hacker" metni - matrix hissi */
+        .spinner-label {
+            color: #00cc44;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: rgba(0, 255, 65, 0.05);
+            padding: 0.4rem 1.2rem;
+            border: 1px solid rgba(0, 255, 65, 0.15);
+            border-radius: 40px;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 6px #00ff41;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.05);
+        }
+
+        /* ----- ASCII / MATRIX SAHTE KOD SATIRLARI (hacker ambiyansı) ----- */
+        .matrix-lines {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1.8rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #00cc44;
+            opacity: 0.7;
+            text-shadow: 0 0 5px #00aa33;
+        }
+
+        .matrix-lines span {
+            display: block;
+            background: rgba(0, 255, 65, 0.02);
+            padding: 0.2rem 1.2rem;
+            border-radius: 20px;
+            border-left: 2px solid #00ff41;
+            letter-spacing: 2px;
+            animation: blink 1.6s step-end infinite;
+        }
+
+        /* farklı zamanlamalarla yanıp sönen satırlar */
+        .line1 { animation-delay: 0.0s; }
+        .line2 { animation-delay: 0.5s; }
+        .line3 { animation-delay: 1.0s; }
+        .line4 { animation-delay: 1.5s; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* alt kısımda ufak bir "hacker" imzası */
+        .hacker-footer {
+            margin-top: 2.2rem;
+            color: #00882b;
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            border-top: 1px solid rgba(0, 255, 65, 0.08);
+            padding-top: 1.4rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .hacker-footer i {
+            font-style: normal;
+            display: inline-block;
+            animation: flicker 2.2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 0.4; }
+            30% { opacity: 1; text-shadow: 0 0 15px #00ff41; }
+            70% { opacity: 0.6; }
+        }
+
+        /* ----- DİNAMİK YÜZDE (opsiyonel) hacker gibi ilerlesin ----- */
+        .progress-percent {
+            color: #00ff41;
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+            text-shadow: 0 0 12px #00aa33;
+        }
+
+        /* küçük ekranlar için responsive */
+        @media (max-width: 500px) {
+            .hacker-card { padding: 2rem 1.5rem; }
+            .hacker-title { font-size: 2.2rem; letter-spacing: 2px; }
+            .spinner-ring { width: 55px; height: 55px; border-width: 4px; }
+            .spinner-label { font-size: 0.8rem; padding: 0.3rem 0.8rem; }
+            .matrix-lines span { font-size: 0.7rem; }
+            .hacker-footer { font-size: 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hacker-card">
+
+        <!-- BAŞLIK: SAYFA YÜKLENİYOR (glitch efektli) -->
+        <div class="hacker-title glitch-text">SAYFA YÜKLENİYOR</div>
+
+        <!-- SPINNER + HACKER ETİKETİ -->
+        <div class="hacker-spinner">
+            <div class="spinner-ring"></div>
+            <span class="spinner-label">>> HACKING <<</span>
+        </div>
+
+        <!-- SAHTE YÜZDE (dinamik olarak artar) -->
+        <div class="progress-percent" id="progressDisplay">%0</div>
+
+        <!-- MATRIX / TERMINAL SAHTE KOD SATIRLARI -->
+        <div class="matrix-lines">
+            <span class="line1">>_ decrypting payload...</span>
+            <span class="line2">>_ root access granted</span>
+            <span class="line3">>_ loading modules 0x7F</span>
+            <span class="line4">>_ firewall bypassed</span>
+        </div>
+
+        <!-- HACKER ALT BİLGİ (imza) -->
+        <div class="hacker-footer">
+            <i>// anonymous //</i>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // ---- HACKER TARZI YÜZDE İLERLEMESİ (rastgele hızda, terminal hissi) ----
+            const progressEl = document.getElementById('progressDisplay');
+            let progress = 0;
+            const maxProgress = 100;
+            let intervalId = null;
+
+            // rastgele 1-4 arası artış, bazen takılır gibi
+            function updateProgress() {
+                if (progress >= maxProgress) {
+                    // %100 olduğunda hafif bir "tamamlandı" efekti
+                    if (progressEl) {
+                        progressEl.textContent = '%100 ✓';
+                        progressEl.style.color = '#66ff88';
+                        progressEl.style.textShadow = '0 0 25px #00ff41, 0 0 60px #00aa33';
+                    }
+                    // interval'i temizle
+                    if (intervalId) {
+                        clearInterval(intervalId);
+                        intervalId = null;
+                    }
+                    return;
+                }
+
+                // rastgele artış (1-5 arası) + bazen 0 (takılma hissi)
+                let step = Math.floor(Math.random() * 5) + 1; // 1-5
+                // %90'dan sonra yavaşlat (daha hacker)
+                if (progress > 85) {
+                    step = Math.floor(Math.random() * 2) + 1; // 1-2
+                }
+                // ara sıra hiç artma (takılma efekti) ~ %20 ihtimal
+                if (Math.random() < 0.2) {
+                    step = 0;
+                }
+
+                progress = Math.min(progress + step, maxProgress);
+
+                if (progressEl) {
+                    progressEl.textContent = `%${progress}`;
+                    // renk tonu parlaklık değişimi
+                    if (progress > 70) {
+                        progressEl.style.color = '#66ff88';
+                    } else {
+                        progressEl.style.color = '#00ff41';
+                    }
+                }
+            }
+
+            // başlat: hemen bir kere çalıştır, sonra interval
+            if (progressEl) {
+                progressEl.textContent = '%0';
+            }
+
+            // interval başlat (hacker hissi: 280ms - 500ms arası değişken)
+            function startProgress() {
+                if (intervalId) clearInterval(intervalId);
+                // ilk güncelleme
+                updateProgress();
+                // rastgele aralıkla devam et (200-450ms)
+                function scheduleNext() {
+                    if (progress >= maxProgress) return;
+                    const delay = Math.floor(Math.random() * 250) + 200; // 200-450ms
+                    intervalId = setTimeout(() => {
+                        updateProgress();
+                        scheduleNext();
+                    }, delay);
+                }
+                scheduleNext();
+            }
+
+            // sayfa yüklendiğinde başlat
+            window.addEventListener('load', function() {
+                startProgress();
+            });
+
+            // ekstra: fare hareketi veya tıklama ile "hacker" tepkisi (opsiyonel, sadece stil)
+            // dokunma / tıklama ile yüzde hızlanıyor gibi (eğlence)
+            document.querySelector('.hacker-card')?.addEventListener('click', function(e) {
+                // hızlıca %3-5 ekle (maks 100)
+                if (progress < maxProgress) {
+                    progress = Math.min(progress + 4, maxProgress);
+                    if (progressEl) {
+                        progressEl.textContent = `%${progress}`;
+                        if (progress >= 100) {
+                            progressEl.textContent = '%100 ✓';
+                            progressEl.style.color = '#66ff88';
+                        }
+                    }
+                }
+            });
+
+            // konsola da bir mesaj (hacker tarzı)
+            console.log('%c>> SAYFA YÜKLENİYOR... HACKER MODU <<', 'color: #00ff41; font-size: 16px; font-weight: bold; background: #0a0c0f; padding: 6px 12px; border: 1px solid #00ff41;');
+            console.log('%c>_ root@localhost:~# ./hacker_loader', 'color: #00aa33;');
+
+        })();
+    </script>
+
+</body>
+              </html>
